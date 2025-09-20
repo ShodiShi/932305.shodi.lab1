@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSS Liquid Layout #3.2 - (Fluid-Fluid-Fixed)</title>
+  <style>
+    :root{
+      --green:#C8FC98;   /* left column */
+      --light-gray:#EAEAEA; /* header */
+      --accent-yellow:#FDE95E; /* right label */
+      --header-height:75px;
+      --footer-height:40px;
+      --right-width:200px;
+      --left-percent:25%;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      padding-bottom:var(--footer-height); /* чтобы фиксированный футер не перекрывал контент */
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size:14px;
+      color:#111;
+      background:white;
+    }
+    header{
+      height: var(--header-height);
+      background:var(--light-gray);
+      padding:14px 18px;
+      border-bottom:1px solid #d0d0d0;
+      box-sizing:border-box;
+    }
+    header h1{
+      margin:0;
+      font-size:28px;
+      font-weight:700;
+    }
+
+    /* контейнер трёх колонок */
+    .wrap{
+      display:flex;
+      align-items:flex-start;
+      min-height:calc(100vh - var(--header-height) - var(--footer-height));
+      box-sizing:border-box;
+    }
+
+    /* Левая колонка — процентная (fluid по ширине окна) */
+    .sidebar-left{
+      background:var(--green);
+      padding:10px 12px;
+      box-sizing:border-box;
+      border-right:1px solid rgba(0,0,0,0.08);
+      line-height:1.5;
+      font-size:13px;
+      flex:0 0 var(--left-percent); /* фиксируем ширину в процентах */
+      max-height:calc(100vh - var(--header-height) - 24px);
+      overflow:auto;
+    }
+    .sidebar-left .title{
+      font-weight:700;
+      margin-bottom:8px;
+      font-size:13px;
+      display:block;
+    }
+
+    /* Центральная (fluid) */
+    .content{
+      flex:1 1 auto;
+      padding:5px 18px;
+      box-sizing:border-box;
+      min-width:0; /* важно для корректного сжатия flex-элемента */
+    }
+    .content .label{
+      display:inline-block;
+      font-weight:700;
+      vertical-align:middle;
+    }
+    .content p{
+      margin-top:0;
+      text-align:justify;
+      color:#222;
+    }
+
+    /* Правая колонка — фиксированная ширина */
+    .sidebar-right{
+      width:var(--right-width);
+      flex:0 0 var(--right-width);
+      background: #FFF28A; /* похожий на желтый из примера */
+      padding:10px 12px;
+      box-sizing:border-box;
+      border-left:1px solid rgba(0,0,0,0.08);
+      line-height:1.5;
+      font-size:13px;
+      max-height:calc(100vh - var(--header-height) - 24px);
+      overflow:auto;
+    }
+    .sidebar-right .title{
+      font-weight:700;
+      margin-bottom:8px;
+      font-size:13px;
+      display:block;
+    }
+
+    footer{
+      background:#000;
+      color:#fff;
+      text-align:center;
+      padding:6px 0;
+      position:fixed;
+      left:0; right:0; bottom:0;
+      height:var(--footer-height);
+      line-height:var(--footer-height);
+      font-size:13px;
+      box-sizing:border-box;
+    }
+    footer a{color:var(--accent-yellow); text-decoration:none;}
+
+    /* small screens: stack columns */
+    @media(max-width:760px){
+      .wrap{flex-direction:column}
+      .sidebar-left, .sidebar-right{width:100%; flex:0 0 auto; max-height:none; overflow:visible;}
+      .content{order:3}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CSS Liquid Layout #3.2- (Fluid-Fluid-Fixed)</h1>
+  </header>
+
+  <div class="wrap">
+    <!-- Левая колонка (теперь процентная) -->
+    <aside class="sidebar-left" aria-label="Левая колонка">
+      
+      <div>
+        <span style="font-weight: bold;">Left Column: <strong style="color:red; font-style: italic;">25%</strong></span>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis libero lacinia, dictum nulla quis, lobortis turpis. Quisque auctor porta convallis. Proin vulputate placerat lectus et imperdiet. Donec pulvinar tempor posuere. Fusce nibh dolor, ornare vel egestas in, condimentum vel mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac eleifend dui. Praesent malesuada sagittis odio vitae gravida. Donec sodales diam turpis, sed blandit ante bibendum sed. Vestibulum feugiat lectus a felis porttitor, id cursus purus ultricies. Nulla molestie pulvinar ipsum, eget fermentum urna ullamcorper non. In lacinia nisi at elit efficitur, ut congue nulla tempus. Donec et urna varius, efficitur felis at, blandit elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin quis convallis nibh, eget interdum turpis.
+      </div>
+    </aside>
+
+    <!-- Центральная колонка -->
+    <main class="content" role="main">
+      <p><span class="label">Content Column: <strong style="color:#d00; font-style: italic;">Fluid</strong></span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis libero lacinia, dictum nulla quis, lobortis turpis. Quisque auctor porta convallis. Proin vulputate placerat lectus et imperdiet. Donec pulvinar tempor posuere. Fusce nibh dolor, ornare vel egestas in, condimentum vel mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac eleifend dui. Praesent malesuada sagittis odio vitae gravida. Donec sodales diam turpis, sed blandit ante bibendum sed. Vestibulum feugiat lectus a felis porttitor, id cursus purus ultricies. Nulla molestie pulvinar ipsum, eget fermentum urna ullamcorper non. In lacinia nisi at elit efficitur, ut congue nulla tempus. Donec et urna varius, efficitur felis at, blandit elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin quis convallis nibh, eget interdum turpis.</p>
+
+      <!-- extra empty space to imitate large page height from screenshot -->
+      <div style="height:900px;"></div>
+    </main>
+
+    <!-- Правая колонка (фиксированная 200px) -->
+    <aside class="sidebar-right" aria-label="Правая колонка">
+      <span class="title">Right Column: <strong style="color:red; font-style: italic;">200px</strong></span>
+      <div>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis libero lacinia, dictum nulla quis, lobortis turpis. Quisque auctor porta convallis. Proin vulputate placerat lectus et imperdiet. Donec pulvinar tempor posuere. Fusce nibh dolor, ornare vel egestas in, condimentum vel mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac eleifend dui. Praesent malesuada sagittis odio vitae gravida. Donec sodales diam turpis, sed blandit ante bibendum sed. Vestibulum feugiat lectus a felis porttitor, id cursus purus ultricies. Nulla molestie pulvinar ipsum, eget fermentum urna ullamcorper non. In lacinia nisi at elit efficitur, ut congue nulla tempus. Donec et urna varius, efficitur felis at, blandit elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin quis convallis nibh, eget interdum turpis.
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <a style="text-decoration: underline;" href="https://www.csd.tsu.ru">www.csd.tsu.ru</a>
+  </footer>
+</body>
+</html>

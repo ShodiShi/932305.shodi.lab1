@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <title>Task 2.5 — Yeşil ve Mavi Kart</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #ffffff;
+      font-family: "Times New Roman", Times, serif;
+      overflow-x: hidden;
+    }
+
+    /* Ortala ve max genişlik yönetimi */
+    .wrap {
+      width: 95vw;
+      max-width: 800px;
+      margin: 0 auto;
+      padding-top: 18px; /* üst boşluk */
+    }
+
+    /* Ortak kart stilleri */
+    .card {
+      color: #fff;
+      text-align: justify;
+      line-height: 1.15;
+      font-size: 13px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    /* Küçük yeşil kart (üstte) */
+.card--green {
+  width: min(54%, 420px);
+  margin: 0 auto;
+        line-height: 1.25;
+  background: #007f2f;
+  border: 2px #005a22;
+  text-align: left; /* Sadece yeşil kartı sola hizalar */
+}
+
+    /* Büyük mavi kart (altta) */
+    .card--blue {
+      width: 95%;
+      max-width: 540px;              /* senin orijinal max-width */
+      margin: 48px auto;             /* üstten boşluk ile ortala */
+      padding: 36px 34px;            /* bol padding, görselde kalın görünüş */
+      background: #001aff;           /* parlak mavi */
+      border: 8px #0000b3;     /* mavi kenarlık (kalın) */
+        /* Metin taşma kontrolü */
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+    }
+
+    /* Küçük ekranlarda daha dengeli görünmesi için */
+    @media (max-width: 420px) {
+      .card--green { width: 92%; padding: 8px; }
+      .card--blue  { padding: 22px; border-width: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article class="card card--green">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis libero lacinia, dictum nulla quis, lobortis turpis. Quisque auctor porta convallis. Proin vulputate placerat lectus et imperdiet. Donec pulvinar tempor posuere. Fusce nibh dolor, ornare vel egestas in, condimentum vel mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac eleifend dui. Praesent malesuada sagittis odio vitae gravida. Donec sodales diam turpis, sed blandit ante bibendum sed. Vestibulum feugiat lectus a felis porttitor, id cursus purus ultricies. Nulla molestie pulvinar ipsum, eget fermentum urna ullamcorper non. In lacinia nisi at elit efficitur, ut congue nulla tempus. Donec et urna varius, efficitur felis at, blandit elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin quis convallis nibh, eget interdum turpis.
+    </article>
+
+    <article class="card card--blue">
+      Padding + border = fat block Maecenas malesuada erat dictum felis ornare, id egestas augue mattis. Vivamus neque sapien, blandit nec accumsan in, lobortis faucibus quam. Cras porttitor, felis id consequat rhoncus, ipsum nunc pellentesque elit, quis rhoncus tortor ipsum blandit enim. Etiam ullamcorper turpis sit amet lectus bibendum, vel maximus ante bibendum. Pellentesque aliquet nisl ut dignissim malesuada. Morbi ac posuere nunc. Donec vitae pellentesque lectus. Sed sit amet purus pellentesque, maximus lorem nec, egestas massa. Fusce tempus sem non nunc finibus, ultrices sollicitudin mi porttitor. Ut sed justo nisl. Sed vel metus urna. Suspendisse semper diam vel pharetra hendrerit. Nulla ut justo elit. Aliquam pellentesque varius venenatis. Proin eu diam sed magna congue vehicula. Praesent eu enim ut ante vulputate posuere in quis enim. Integer ultrices augue rhoncus turpis pulvinar posuere.
+    </article>
+  </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task 2.10</title>
+  <style>
+    /* Genel ayarlar */
+    html,body{height:100%;}
+    body{
+      margin:18px;
+      font-family: serif;
+      background: white;
+      color: #000;
+    }
+
+    /* Yüzen kutu */
+    .float-box{
+      float: left;
+      width: 160px;            /* ekran dar olduğunda görünen boyut */
+      height: 90px;
+      padding: 8px;
+      box-sizing: border-box;
+      background: aquamarine;  /* mint/yeşil tonunu yakalamak için */
+      margin-right: 20px;
+      margin-bottom: 10px;
+    }
+
+    /* Clear uygulanmış kutu (tam genişlik gibi görünmesi için) */
+    .clear-box{
+      clear: both;
+      background: bisque;     /* açık şeftali/bej arka plan */
+      padding: 8px 10px;
+      margin-top: 6px;
+    }
+
+    /* Büyük ekranlarda biraz farklı boşluk ve ölçek */
+    @media (min-width: 1000px){
+      body{margin:26px;}
+      .float-box{ width: 140px; height: 80px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="float-box">It's a float box</div>
+  <div class="clear-box">It's a box with clear property</div>
+</body>
+</html>

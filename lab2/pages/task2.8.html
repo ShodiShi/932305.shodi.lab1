@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>task2</title>
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 5px;
+    padding-bottom: 80px; /* footer yüksekliği + az bir boşluk (65px footer + 10px güvenlik) */
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    background-color: white;
+  }
+
+  /* container içeriğe göre büyür; çocuklar aynı yüksekliği alacak */
+  .container {
+    display: flex;
+    align-items: stretch; /* children'ların eşit yüksekliğe gerilmesini sağlar */
+    gap: 0;
+  }
+
+  .sidebar {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* üst kısım sabit yüksekliğe sahip */
+  .sidebar-top {
+    background-color: bisque;
+    padding: 10px;
+    flex: 0 0 120px; /* sabit 120px yüksekliğe zorla */
+  }
+
+  /* alt kısım içerik yüksekliğine göre büyüsün */
+  .sidebar-bottom {
+    background-color: aqua;
+    padding: 10px;
+    flex: 1 1 auto;   /* kalan yüksekliği kaplar */
+    overflow: auto;   /* içerik taşarsa scroll verir */
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar li {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .sidebar li:before { content: "• "; color: black; }
+
+  /* içerik alanı paragraf kadar yüksek olur ve sidebar ile aynı h. olur */
+  .content {
+    background-color: darkgray;
+    flex: 1 1 auto;
+    padding: 10px;
+    word-wrap: break-word;
+    overflow: visible; /* istersen auto yapabilirsin */
+  }
+
+  .content p {
+    margin: 0 0 10px 0;
+    text-align: justify;
+    line-height: 1.3;
+    hyphens: auto;
+  }
+
+  /* footer sabit, ekranın dibinde */
+  .footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 65px;
+    background-color: limegreen;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="sidebar-top">
+        <ul>
+          <li>Home</li>
+          <li>Hours</li>
+          <li>Direction</li>
+        </ul>
+      </div>
+      <div class="sidebar-bottom"></div>
+    </div>
+
+    <div class="content">
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis libero lacinia, dictum nulla quis, lobortis turpis. Quisque auctor porta convallis. Proin vulputate placerat lectus et imperdiet. Donec pulvinar tempor posuere. Fusce nibh dolor, ornare vel egestas in, condimentum vel mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac eleifend dui. Praesent malesuada sagittis odio vitae gravida. Donec sodales diam turpis, sed blandit ante bibendum sed. Vestibulum feugiat lectus a felis porttitor, id cursus purus ultricies. Nulla molestie pulvinar ipsum, eget fermentum urna ullamcorper non. In lacinia nisi at elit efficitur, ut congue nulla tempus. Donec et urna varius, efficitur felis at, blandit elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin quis convallis nibh, eget interdum turpis. Maecenas malesuada erat dictum felis ornare, id egestas augue mattis. Vivamus neque sapien, blandit nec accumsan in, lobortis faucibus quam. Cras porttitor, felis id consequat rhoncus, ipsum nunc pellentesque elit, quis rhoncus tortor ipsum blandit enim. Etiam ullamcorper turpis sit amet lectus bibendum, vel maximus ante bibendum. Pellentesque aliquet nisl ut dignissim malesuada. Morbi ac posuere nunc. Donec vitae pellentesque lectus. Sed sit amet purus pellentesque, maximus lorem nec, egestas massa. Fusce tempus sem non nunc finibus, ultrices sollicitudin mi porttitor. Ut sed justo nisl. Sed vel metus urna. Suspendisse semper diam vel pharetra hendrerit. Nulla ut justo elit. Aliquam pellentesque varius venenatis. Proin eu diam sed magna congue vehicula. Praesent eu enim ut ante vulputate posuere in quis enim. Integer ultrices augue rhoncus turpis pulvinar posuere.</p>
+            
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis libero lacinia, dictum nulla quis, lobortis turpis. Quisque auctor porta convallis. Proin vulputate placerat lectus et imperdiet. Donec pulvinar tempor posuere. Fusce nibh dolor, ornare vel egestas in, condimentum vel mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac eleifend dui. Praesent malesuada sagittis odio vitae gravida. Donec sodales diam turpis, sed blandit ante bibendum sed. Vestibulum feugiat lectus a felis porttitor, id cursus purus ultricies. Nulla molestie pulvinar ipsum, eget fermentum urna ullamcorper non. In lacinia nisi at elit efficitur, ut congue nulla tempus. Donec et urna varius, efficitur felis at, blandit elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin quis convallis nibh, eget interdum turpis.</p>
+            
+            <p>Maecenas malesuada erat dictum felis ornare, id egestas augue mattis. Vivamus neque sapien, blandit nec accumsan in, lobortis faucibus quam. Cras porttitor, felis id consequat rhoncus, ipsum nunc pellentesque elit, quis rhoncus tortor ipsum blandit enim. Etiam ullamcorper turpis sit amet lectus bibendum, vel maximus ante bibendum. Pellentesque aliquet nisl ut dignissim malesuada. Morbi ac posuere nunc. Donec vitae pellentesque lectus. Sed sit amet purus pellentesque, maximus lorem nec, egestas massa. Fusce tempus sem non nunc finibus, ultrices sollicitudin mi porttitor. Ut sed justo nisl. Sed vel metus urna. Suspendisse semper diam vel pharetra hendrerit. Nulla ut justo elit. Aliquam pellentesque varius venenatis. Proin eu diam sed magna congue vehicula. Praesent eu enim ut ante vulputate posuere in quis enim. Integer ultrices augue rhoncus turpis pulvinar posuere.</p>      
+    </div>
+  </div>
+
+  <div class="footer"></div>
+</body>
+</html>

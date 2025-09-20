@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>task2.13 (ilk paragraf sonrası top-right)</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #fff; }
+
+        /* Çerçeve ve layout:
+           -> min-height kaldırıldı, container içeriğe göre boyutlanır
+           -> align-items: stretch ile yan sütunlar aynı yükseklikte olur */
+        #container {
+            display: flex;
+            align-items: stretch; /* sol menü içerik yüksekliğine göre gerilir */
+            margin: 8px;
+            border: 3px solid green;
+            /* overflow removed so container height follows content */
+        }
+
+        /* Sol menü (bej + turkuaz) */
+        #menu { width: 280px; display:flex; flex-direction:column; }
+        .menu-top { background: bisque; padding:12px; }
+        .menu-top ul { margin:0; padding-left:18px; list-style: disc; }
+        .menu-bottom { background: aqua; flex:1; min-height: 0; } /* min-height:0 helps flex children shrink properly */
+
+        /* İçerik */
+        #content {
+            flex: 1;
+            background: lightgray;
+            position: relative;
+            line-height: 1.2;
+        }
+        #content p { margin: 0 0 1em 0; text-align: justify; }
+
+        /* Resim: border/gölge kaldırıldı, float sağda (varsayılan) */
+        #content img {
+            float: right;
+            display: block;
+            border: none;
+            box-shadow: none;
+            margin: 0;              /* sağa yapışık olması için 0 */
+            width: 420px;
+            max-width: 45%;
+            height: auto;
+        }
+
+        /* Büyük ekran: 1. paragraf sonrası geniş boşluk, resim top-right'e "yapışık" */
+        
+        @media (min-width: 1200px) {
+            #content { padding-right: 0; }
+
+            /* 1. paragraf alt boşluğu: resmin yüksekliğine göre ayarlanmış geniş bir boşluk */
+            #content p:first-of-type { margin-bottom: 260px; }
+
+            #content img {
+                width: 520px;
+                max-width: 45%;
+                margin-top: 0;
+                margin-right: 0;
+            }
+
+            /* 2. paragraf floata göre altından başlasın */
+            #content p:nth-of-type(2) { clear: right; margin-top: 12px; }
+        }
+
+        /* Orta / küçük ekran ayarları */
+        @media (max-width: 1400px) {
+            #content img { width: 360px; max-width: 42%; }
+        }
+        @media (max-width: 1100px) {
+            #menu { width: 240px; }
+            #content img { width: 300px; max-width: 40%; }
+            #content p:first-of-type { margin-bottom: 160px; } /* resim küçülürse boşluğu azalt */
+        }
+
+        /* Küçük ekran: resim absolute sağ üst, içerik üst padding ile korunur */
+        @media (max-width: 700px) {
+            #menu { width: 200px; }
+
+            #content img {
+                float: none;
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                width: 110px;
+                max-width: 35%;
+                height: auto;
+                z-index: 20;
+            }
+
+            /* içerik üst boşluğu, resimle çakışmamak için */
+            #content { padding-top: 140px; padding-right: 20px; }
+            #content p:first-of-type { margin-bottom: 40px; }
+            /* küçük ekranlarda clear kaldır, çünkü resim absolute */
+            #content p:nth-of-type(2) { clear: none; }
+        }
+
+        @media (max-width: 420px) {
+            #menu { width: 160px; }
+            #content img { width: 90px; top:6px; right:6px; }
+            #content { padding-top: 120px; padding-left:12px; padding-right:12px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="menu">
+            <div class="menu-top">
+                <ul>
+                    <li>Home</li>
+                    <li>Hours</li>
+                    <li>Direction</li>
+                </ul>
+            </div>
+            <div class="menu-bottom"></div>
+        </div>
+
+        <div id="content">
+
+            <p><img src="image.jpg" alt="Hamster">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis libero lacinia, dictum nulla quis, lobortis turpis. Quisque auctor porta convallis. Proin vulputate placerat lectus et imperdiet. Donec pulvinar tempor posuere. Fusce nibh dolor, ornare vel egestas in, condimentum vel mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac eleifend dui. Praesent malesuada sagittis odio vitae gravida. Donec sodales diam turpis, sed blandit ante bibendum sed. Vestibulum feugiat lectus a felis porttitor, id cursus purus ultricies. Nulla molestie pulvinar ipsum, eget fermentum urna ullamcorper non. In lacinia nisi at elit efficitur, ut congue nulla tempus. Donec et urna varius, efficitur felis at, blandit elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin quis convallis nibh, eget interdum turpis.
+            </p>
+
+            <p>
+                Maecenas malesuada erat dictum felis ornare, id egestas augue mattis. Vivamus neque sapien, blandit nec accumsan in, lobortis faucibus quam. Cras porttitor, felis id consequat rhoncus, ipsum nunc pellentesque elit, quis rhoncus tortor ipsum blandit enim. Etiam ullamcorper turpis sit amet lectus bibendum, vel maximus ante bibendum. Pellentesque aliquet nisl ut dignissim malesuada. Morbi ac posuere nunc. Donec vitae pellentesque lectus. Sed sit amet purus pellentesque, maximus lorem nec, egestas massa. Fusce tempus sem non nunc finibus, ultrices sollicitudin mi porttitor. Ut sed justo nisl. Sed vel metus urna. Suspendisse semper diam vel pharetra hendrerit. Nulla ut justo elit. Aliquam pellentesque varius venenatis. Proin eu diam sed magna congue vehicula. Praesent eu enim ut ante vulputate posuere in quis enim. Integer ultrices augue rhoncus turpis pulvinar posuere.
+            </p>
+
+            <p>
+                Maecenas malesuada erat dictum felis ornare, id egestas augue mattis. Vivamus neque sapien, blandit nec accumsan in, lobortis faucibus quam. Cras porttitor, felis id consequat rhoncus, ipsum nunc pellentesque elit, quis rhoncus tortor ipsum blandit enim. Etiam ullamcorper turpis sit amet lectus bibendum, vel maximus ante bibendum. Pellentesque aliquet nisl ut dignissim malesuada. Morbi ac posuere nunc. Donec vitae pellentesque lectus. Sed sit amet purus pellentesque, maximus lorem nec, egestas massa. Fusce tempus sem non nunc finibus, ultrices sollicitudin mi porttitor. Ut sed justo nisl. Sed vel metus urna. Suspendisse semper diam vel pharetra hendrerit. Nulla ut justo elit. Aliquam pellentesque varius venenatis. Proin eu diam sed magna congue vehicula. Praesent eu enim ut ante vulputate posuere in quis enim. Integer ultrices augue rhoncus turpis pulvinar posuere.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

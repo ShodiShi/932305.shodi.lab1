@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>task2.11 - final</title>
+  <style>
+    /* Kesin: hiç padding yok (global), sadece body margin var */
+    *{ box-sizing: border-box; padding: 0; margin: 0; }
+    html,body{ height:100%; }
+    body{ margin:8px; font-family: serif; background:#fff; }
+
+    /* Çerçeve: padding yok, ince yeşil kenarlık */
+    .frame{
+      border:2px solid forestgreen;
+      padding:0;              /* kesinlikle yok */
+      display:flex;           /* yan yana, yükseklikleri eşitlemek için flex */
+      align-items:stretch;    /* içerikler aynı yükseklikte olsun */
+      width:100%;
+      max-width:100%;
+      overflow:hidden;
+    }
+
+    /* Soldaki tek paragraf kutusu (turkuaz): padding yok, yalnızca bir <p> içerir */
+    .sidebar{
+      background:aqua;
+      padding:0;              /* kesinlikle yok */
+      min-width:120px;       /* çok küçük olmasın */
+      flex:1 1 auto;         /* kalan alanı kaplasın */
+      display:flex;          /* içindeki paragrafı hizalamak için */
+      align-items:flex-start;/* üstten başlasın */
+    }
+
+    .sidebar p{ margin:3px 6px 0 6px; /* çok küçük margin; padding yok */ }
+
+    /* Resim: sabit genişlik, sabit yükseklik; object-fit ile kırpma */
+    .photo{
+      width:220px;
+      height:180px;
+      object-fit:cover;
+      display:block;
+      margin:0;               /* padding yok */
+      flex: 0 0 auto;        /* flex kutusunu sabit tut */
+    }
+
+    /* Resmi sola almak istersen .photo.left ekle (sırası değişir) */
+    .frame.photo-left { flex-direction: row-reverse; }
+
+    /* Responsive: dar ekranlarda resim küçült ve sidebar daralsın */
+    @media (max-width:520px){
+      .photo{ width:160px; height:140px; }
+      .sidebar{ min-width:100px; }
+    }
+
+    @media (min-width:1200px){
+      .photo{ width:260px; height:200px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Eğer resmi sola almak istersen: <div class="frame photo-left"> -->
+  <div class="frame" role="group" aria-label="task2.11-frame">
+    <aside class="sidebar">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis libero lacinia, dictum nulla quis, lobortis turpis.</p>
+    </aside>
+
+    <!-- image.jpg dosyasını aynı klasöre koy. Resmi sola almak için .frame elementine photo-left sınıfını ekle. -->
+    <img src="image.jpg" alt="image" class="photo">
+  </div>
+</body>
+</html>
