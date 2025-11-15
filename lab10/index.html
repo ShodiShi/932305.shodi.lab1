@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="index.js"></script>
+    <title>Lab 10</title>
+</head>
+
+<body>
+    <div id="curtain"></div>
+    <div id="lamp" class="">
+        <svg style="width: 100%; height: 100%;" width="146" height="395" viewBox="0 0 146 395" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <g id="group_1">
+                <path id="polygon_1" class="lamp-hover" d="M34 0H106.921L146 80H0L34 0Z" fill="#0196B1" />
+                <rect id="polygon_2" class="lamp-hover" x="67" y="80" width="7" height="81" fill="#B7B6BC" />
+                <rect id="polygon_3" class="switcher" x="39" y="80" width="2" height="76" fill="#9E9E9C" />
+                <rect id="polygon_4" class="lamp-hover" x="65" y="172" width="12" height="183" fill="#B7B6BC" />
+                <ellipse id="polygon_5" class="lamp-hover" cx="70.5" cy="167" rx="15.5" ry="9" fill="#0096B1" />
+                <circle id="polygon_6" class="switcher" cx="40" cy="160" r="6" fill="#E6CA5D" />
+                <ellipse id="polygon_7" class="lamp-hover" cx="69.5" cy="368.5" rx="15.5" ry="17.5" fill="#0096B1" />
+                <path id="polygon_7" class="lamp-hover"
+                    d="M69.5256 367.5C47.7104 367.5 30.0256 379.812 30.0256 395H109.026C109.026 379.812 91.3409 367.5 69.5256 367.5Z"
+                    fill="#B7B6BC" />
+            </g>
+        </svg>
+    </div>
+    <div class="light">
+        <div class="light-inner">
+            <div id="light"></div>
+            <div class="magician"></div>
+            <svg class="magic-hat" preserveAspectRatio="xMidYMid meet" width="1280" height="957" viewBox="0 0 1280 957"
+                fill="none" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+                <image href="assets/Bird.png" x="35%" width="30%" y="-60%">
+                    <animate dur="1.0s" values="0;-60%" fill="freeze" attributeName="y" begin="startBird.end" />
+
+                    <animate id="startRabbit" dur="1.0s" attributeName="y" values="-60%;0" fill="freeze"
+                        begin="click" />
+                </image>
+                <image href="assets/Rabbit.png" x="35%" width="30%">
+                    <animate dur="1.0s" attributeName="y" values="0;-50%" begin="startRabbit.end" fill="freeze" />
+
+                    <animate id="startBird" dur="1.0s" attributeName="y" values="-50%;0" fill="freeze" begin="click" />
+                </image>
+                <image id="magicHat" href="assets/Hat.png" transform="rotate(180)" transform-origin="50% 50%"></image>
+            </svg>
+        </div>
+    </div>
+</body>
+
+</html>
