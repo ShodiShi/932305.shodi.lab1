@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lab2 All Pages in One</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+            * {box-sizing: border-box; margin:0; padding:0}
+            html,body{height:100%}
+            body {
+                font-family: "Inter", sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                overflow-x: hidden;
+                color: white;
+            }
+
+            .background-pattern {
+                position: fixed; inset:0; z-index:-1; opacity:0.10;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') center/120px 120px repeat;
+            }
+
+            .container {max-width:1400px; margin:0 auto; padding:2rem}
+
+            .header {text-align:center; margin-bottom:3rem}
+            .title {
+                font-size: clamp(2.4rem, 6vw, 4.5rem);
+                font-weight:700; color:transparent; background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
+                -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+                text-shadow:0 6px 18px rgba(0,0,0,0.25)
+            }
+            .subtitle{font-weight:300; color:rgba(255,255,255,0.9); margin-top:6px}
+
+            .stats-bar{display:flex;justify-content:center;gap:3rem;margin:2rem 0}
+            .stat{ text-align:center }
+            .stat-number{font-size:2.5rem;font-weight:700}
+            .stat-label{font-size:.85rem;opacity:.85;letter-spacing:1px;text-transform:uppercase}
+
+            .labs-grid {
+                display:grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap:1.5rem;
+                margin-bottom:3rem;
+            }
+
+            .lab-card {
+                background: rgba(255,255,255,0.06);
+                backdrop-filter: blur(14px);
+                border:1px solid rgba(255,255,255,0.08);
+                border-radius:18px;
+                padding:1.6rem 1.6rem 1.2rem 1.6rem;
+                position:relative; overflow:hidden; transition:all .35s cubic-bezier(.2,.9,.2,1);
+                transform: translateY(24px); opacity:0; animation:fadeInUp .6s ease-out forwards;
+            }
+
+            /* staggered delays up to 26 */
+            .lab-card:nth-child(1){animation-delay: .05s}
+            .lab-card:nth-child(2){animation-delay: .10s}
+            .lab-card:nth-child(3){animation-delay: .15s}
+            .lab-card:nth-child(4){animation-delay: .20s}
+            .lab-card:nth-child(5){animation-delay: .25s}
+            .lab-card:nth-child(6){animation-delay: .30s}
+            .lab-card:nth-child(7){animation-delay: .35s}
+            .lab-card:nth-child(8){animation-delay: .40s}
+            .lab-card:nth-child(9){animation-delay: .45s}
+            .lab-card:nth-child(10){animation-delay: .50s}
+            .lab-card:nth-child(11){animation-delay: .55s}
+            .lab-card:nth-child(12){animation-delay: .60s}
+            .lab-card:nth-child(13){animation-delay: .65s}
+            .lab-card:nth-child(14){animation-delay: .70s}
+            .lab-card:nth-child(15){animation-delay: .75s}
+            .lab-card:nth-child(16){animation-delay: .80s}
+            .lab-card:nth-child(17){animation-delay: .85s}
+            .lab-card:nth-child(18){animation-delay: .90s}
+            .lab-card:nth-child(19){animation-delay: .95s}
+            .lab-card:nth-child(20){animation-delay: 1.00s}
+            .lab-card:nth-child(21){animation-delay: 1.05s}
+            .lab-card:nth-child(22){animation-delay: 1.10s}
+            .lab-card:nth-child(23){animation-delay: 1.15s}
+            .lab-card:nth-child(24){animation-delay: 1.20s}
+            .lab-card:nth-child(25){animation-delay: 1.25s}
+            .lab-card:nth-child(26){animation-delay: 1.30s}
+
+            .lab-card::before{
+                content:""; position:absolute; left:0; right:0; top:0; height:6px; background: linear-gradient(90deg,#ff6b6b,#b17aff,#4ecdc4); border-radius:10px 10px 0 0; opacity:.95
+            }
+
+            .lab-card:hover{ transform:translateY(-8px); box-shadow:0 24px 48px rgba(0,0,0,0.28); background: rgba(255,255,255,0.08) }
+
+            .lab-number{ position:absolute; top:14px; right:14px; width:44px;height:44px;border-radius:999px;background: rgba(255,255,255,0.12); display:grid;place-items:center;font-weight:700}
+
+            .lab-name{ font-size:1.1rem; font-weight:600; padding-right:3.4rem; margin-bottom:.8rem }
+            .lab-desc{ color: rgba(255,255,255,0.85); font-weight:300; font-size:.95rem; margin-bottom:1rem }
+
+            .lab-actions{ display:flex; gap:.8rem; margin-top:0.6rem }
+            .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.6rem; padding:.6rem 1rem; border-radius:10px; text-decoration:none; font-weight:600 }
+            .btn-primary{ background: linear-gradient(90deg,#6b83ff,#8b5cf6); color:white; border:none; flex:1 }
+            .btn-secondary{ background: rgba(255,255,255,0.06); color:white; border:1px solid rgba(255,255,255,0.08); width:48px; height:40px; border-radius:10px }
+
+            footer.footer{ text-align:center; color: rgba(255,255,255,0.8); padding:2rem 0 }
+
+            @keyframes fadeInUp{ from{opacity:0; transform:translateY(24px)} to{opacity:1; transform:translateY(0)} }
+
+            @media(max-width:720px){ .lab-name{font-size:1rem} .lab-card{padding:1.2rem} }
+
+        </style>
+    </head>
+    <body>
+        <div class="background-pattern"></div>
+
+        <div class="container">
+            <header class="header">
+                <h1 class="title">Lab2 Pages</h1>
+                <p class="subtitle">Tasks</p>
+            </header>
+
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-number">17</span>
+                    <span class="stat-label">Общее количество</span>
+                </div>
+            </div>
+
+            <div class="labs-grid" id="labsGrid"></div>
+
+            <footer class="footer">Ягджиоглу Умут, 932301, ИПМКН</footer>
+        </div>
+
+        <script>
+            const labs_data = [
+                { no:1, name: "Task2.1", path: "pages/task2.1.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:2, name: "Task2.2", path: "pages/task2.2.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:3, name: "Task2.3.1", path: "pages/task2.3.1.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:4, name: "Task2.3.2", path: "pages/task2.3.2.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:5, name: "Task2.4.1", path: "pages/task2.4.1.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:6, name: "Task2.4.2", path: "pages/task2.4.2.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:7, name: "Task2.5", path: "pages/task2.5.1.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:8, name: "Task2.6", path: "pages/task2.6.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:9, name: "Task2.7", path: "pages/task2.7.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:10, name: "Task2.8", path: "pages/task2.8.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:11, name: "Task2.9", path: "pages/task2.9.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:12, name: "Task2.10", path: "pages/task2.10.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:13, name: "Task2.11", path: "pages/task2.11.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:14, name: "Task2.12", path: "pages/task2.12.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:15, name: "Task2.13", path: "pages/task2.13.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:16, name: "Task2.14", path: "pages/task2.14.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" },
+                { no:17, name: "Task2.15", path: "pages/task2.15.html", git: "https://gitlab.com/umutyagcioglu01/932301.yagdjioglu.umut.lab01" }
+            ];
+
+            function createLabCard(lab) {
+                return `
+                    <div class="lab-card">
+                        <div class="lab-number" title="Лаборатория №${lab.no}">${lab.no}</div>
+                        <h3 class="lab-name">${lab.name}</h3>
+                        <div class="lab-desc">Нажмите "Просмотреть" для открытия локального .html файла</div>
+                        <div class="lab-actions">
+                            <a class="btn btn-primary" href="${lab.path}" target="_blank" rel="noopener noreferrer">Просмотреть →</a>
+                            <a class="btn btn-secondary" href="${lab.git}" target="_blank" rel="noopener noreferrer" title="Код на GitLab">⌂</a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function populateLabs() {
+                const labsGrid = document.getElementById('labsGrid');
+                labsGrid.innerHTML = labs_data.map(createLabCard).join('');
+            }
+
+            document.addEventListener('DOMContentLoaded', populateLabs);
+        </script>
+    </body>
+</html>

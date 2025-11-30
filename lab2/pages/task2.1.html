@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSS Liquid Layout #2.1 - (Fixed-Fluid)</title>
+  <style>
+    :root{
+      --green:#C8FC98;   /* sidebar */
+      --light-gray:#EAEAEA; /* header */
+      --pale-yellow:#FFFF80; /* content label */
+      --accent-yellow:#FDE95E; /* sidebar label */
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size:14px;
+      color:#111;
+      background:white;
+    }
+    header{
+    height: 75px;
+      background:var(--light-gray);
+      padding:14px 18px;
+      border-bottom:1px solid #d0d0d0;
+    }
+    header h1{
+      margin:0;
+      font-size:28px;
+      font-weight:700;
+      font-weight: bold;
+    }
+    .wrap{
+      display:flex;
+      align-items:flex-start;
+      min-height:calc(100vh - 80px); /* leave space for footer */
+    }
+    /* Fixed left column */
+    .sidebar{
+      width:200px !important;
+      background:var(--green);
+      padding:10px 12px;
+      box-sizing:border-box;
+      border-right:1px solid rgba(0,0,0,0.08);
+      line-height:1.5;
+      font-size:13px;
+    }
+    .sidebar .title{
+      font-weight: bold;
+      font-weight:700;
+      margin-bottom:8px;
+      font-size:13px;
+    }
+    /* Fluid content column */
+    .content{
+      flex:1 1 auto;
+      padding:5px 5px;
+      box-sizing:border-box;
+    }
+    .content .label{
+      display:inline-block;
+      font-weight:700;
+      vertical-align:middle;
+    }
+    .content p{
+      margin-top:0px;
+      text-align:justify;
+      color:#222;
+    }
+    footer{
+      background:#000;
+      color:#fff;
+      text-align:center;
+      padding:6px 0;
+      position:fixed;
+      left:0;right:0;bottom:0;
+      font-size:13px;
+    }
+    footer a{color:var(--accent-yellow); text-decoration:none;}
+    /* small screens: make sidebar above content */
+    @media(max-width:520px){
+      .wrap{flex-direction:column}
+      .sidebar{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CSS Liquid Layout #2.1- (Fixed-Fluid)</h1>
+  </header>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <span class="title">Left Column: <strong style="color:red; font-style: italic;">200px</strong></span>
+      <div>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis libero lacinia, dictum nulla quis, lobortis turpis. Quisque auctor porta convallis. Proin vulputate placerat lectus et imperdiet. Donec pulvinar tempor posuere. Fusce nibh dolor, ornare vel egestas in, condimentum vel mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac eleifend dui. Praesent malesuada sagittis odio vitae gravida. Donec sodales diam turpis, sed blandit ante bibendum sed. Vestibulum feugiat lectus a felis porttitor, id cursus purus ultricies. Nulla molestie pulvinar ipsum, eget fermentum urna ullamcorper non. In lacinia nisi at elit efficitur, ut congue nulla tempus. Donec et urna varius, efficitur felis at, blandit elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin quis convallis nibh, eget interdum turpis.
+      </div>
+    </aside>
+
+    <main class="content">
+
+      <p>      <span class="label">Content Column: <strong style="color:#d00; font-style: italic;">Fluid</strong></span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis libero lacinia, dictum nulla quis, lobortis turpis. Quisque auctor porta convallis. Proin vulputate placerat lectus et imperdiet. Donec pulvinar tempor posuere. Fusce nibh dolor, ornare vel egestas in, condimentum vel mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac eleifend dui. Praesent malesuada sagittis odio vitae gravida. Donec sodales diam turpis, sed blandit ante bibendum sed. Vestibulum feugiat lectus a felis porttitor, id cursus purus ultricies. Nulla molestie pulvinar ipsum, eget fermentum urna ullamcorper non. In lacinia nisi at elit efficitur, ut congue nulla tempus. Donec et urna varius, efficitur felis at, blandit elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin quis convallis nibh, eget interdum turpis.</p>
+
+      <!-- extra empty space to imitate large page height from screenshot -->
+      <div style="height:900px;"></div>
+    </main>
+  </div>
+
+  <footer>
+    <a style="text-decoration: underline;"href="https://www.csd.tsu.ru">www.csd.tsu.ru</a>
+  </footer>
+</body>
+</html>

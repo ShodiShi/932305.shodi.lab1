@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task 2.15 - 8+4 Düzen (Not Full-bleed)</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;padding:20px 0;font-family:Georgia, 'Times New Roman', serif;background:#fff;color:#111}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(8, 1fr);
+      column-gap:48px;
+      row-gap:34px;
+      padding-top:36px;
+      align-items:start;
+    }
+
+    .card{background:#86f0db;height:96px;padding:12px 18px;display:flex;align-items:flex-start;justify-content:flex-start}
+    .card p{margin:0;font-size:14px}
+
+    /* Notu tam ekran genişliğine yaymak için: viewport genişliğini kullanıp ortalıyoruz.
+       İçerik alignment'ı wrap ile eşleşmesi için yatay padding ekliyoruz. */
+    .note{
+      position:relative;
+      left:50%;
+      transform:translateX(-50%);
+      width:99vw;           /* tam viewport genişliği */
+      box-sizing:border-box;
+      margin-top:28px;
+      padding:10px 24px;     /* wrap ile aynı yatay boşluk */
+      background:#f4dec8;
+      border-left:4px solid rgba(0,0,0,0.03);
+      box-shadow: inset 0 0 0 3px rgba(0,0,0,0.02);
+    }
+
+    @media (max-width:1200px){
+      .grid{grid-template-columns: repeat(6, 1fr);column-gap:36px}
+    }
+    @media (max-width:900px){
+      .grid{grid-template-columns: repeat(4, 1fr);column-gap:30px}
+    }
+    @media (max-width:540px){
+      .grid{grid-template-columns: repeat(2, 1fr);column-gap:20px}
+    }
+    @media (max-width:360px){
+      .grid{grid-template-columns: 1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="grid">
+      <!-- İlk satır: 8 kutu -->
+      <div class="card"><p>I'm inline-block!</p></div>
+      <div class="card"><p>I'm inline-block!</p></div>
+      <div class="card"><p>I'm inline-block!</p></div>
+      <div class="card"><p>I'm inline-block!</p></div>
+      <div class="card"><p>I'm inline-block!</p></div>
+      <div class="card"><p>I'm inline-block!</p></div>
+      <div class="card"><p>I'm inline-block!</p></div>
+      <div class="card"><p>I'm inline-block!</p></div>
+
+      <!-- İkinci satır: kalan 4 kutu (solda hizalanmış) -->
+      <div class="card"><p>I'm inline-block!</p></div>
+      <div class="card"><p>I'm inline-block!</p></div>
+      <div class="card"><p>I'm inline-block!</p></div>
+      <div class="card"><p>I'm inline-block!</p></div>
+    </div>
+  </div>
+
+  <!-- Notu wrap dışında bırakmadan da tam genişlik yapacak şekilde stillendi -->
+  <div class="note">There's no need for clear property!</div>
+
+</body>
+</html>
