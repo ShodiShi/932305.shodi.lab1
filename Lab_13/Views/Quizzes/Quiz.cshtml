@@ -1,0 +1,13 @@
+@model Lab_13.Models.Quiz
+
+<div class="center">
+    <h2 class="links-h2">Quiz</h2>
+
+    <form method="post">
+        <label class="fw-bold">@Model.ToString() = </label>
+        <input class="form-control w-auto" type="number" name="Answer"/><br/>
+        <input class="btn btn-outline-secondary" formaction="Quiz" type="submit" value="Next" />
+        <input class="btn btn-primary" formaction="QuizResult" type="submit" value="Finish"/>
+    </form>
+
+</div>

@@ -1,0 +1,15 @@
+@model Lab_13.Models.QuizResult
+
+<div class="center">
+    <h2 class="links-h2">Quiz result</h2>
+
+    <h3>Right answers @Model.RightAnswers.Count of @Model.Count</h3><br/>
+    <ol>
+
+    @for (var index = 0; index < Model.Count; index++)
+    {
+        <li>@Model[index].ToString() = @Model[index].Answer</li>
+    }
+    </ol>
+
+</div>
